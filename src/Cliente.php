@@ -32,6 +32,17 @@ class Cliente
 
 
     /**
+     * Lista os documentos pendentes do cliente PagueVeloz.
+     *
+     * @see https://www.pagueveloz.com.br/Help/Api/GET-api-v4-Cliente-DocumentosPendentes_contaBancariaId
+     * @return Array
+     */
+    public function pendingDocuments()
+    {
+        return $this->http->get('api/v4/Cliente/DocumentosPendentes');
+    }
+
+    /**
      * Faz merge nas informações do cliente.
      *
      * @param Array $cliente
