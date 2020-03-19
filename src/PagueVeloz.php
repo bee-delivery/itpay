@@ -2,13 +2,13 @@
 
 namespace BeeDelivery\PagueVeloz;
 
-use BeeDelivery\PagueVeloz\Functions\General;
+use BeeDelivery\PagueVeloz\src\Cliente;
 
 class PagueVeloz
 {
 
-    public function general() {
-        return new General();
+    public function cliente() {
+        return new Cliente();
     }
 
 }
