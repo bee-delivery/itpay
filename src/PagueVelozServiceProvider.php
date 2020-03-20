@@ -13,7 +13,7 @@ class PagueVelozServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__.'/config/pagueveloz.php', 'pagueveloz');
+        $this->mergeConfigFrom(__DIR__.'./config/pagueveloz.php', 'pagueveloz');
 
         // Register the service the package provides.
         $this->app->singleton('pagueveloz', function ($app) {
@@ -29,7 +29,7 @@ class PagueVelozServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__.'/config/pagueveloz.php' => config_path('pagueveloz.php'),
+            __DIR__.'./config/pagueveloz.php' => config_path('pagueveloz.php'),
         ]);
     }
 
