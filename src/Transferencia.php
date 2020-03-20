@@ -27,6 +27,7 @@ class Transferencia
     public function create($transferencia)
     {
         $transferencia = $this->setTransferencia($transferencia);
+
         return $this->http->post('api/v3/Transferencia', ['json' => $transferencia]);
     }
 
@@ -53,6 +54,7 @@ class Transferencia
             );
 
             $this->transferencia = array_merge($this->transferencia, $transferencia);
+
             return $this->transferencia;
 
         } catch (\Exception $e) {
@@ -71,8 +73,7 @@ class Transferencia
         return ! (
             empty($transferencia['ClienteDestinoId']) OR
             empty($transferencia['Valor']) OR
-            empty($transferencia['Descricao']) OR
-            empty($transferencia['SeuNumero'])
+            empty($transferencia['Descricao'])
         );
     }
 }

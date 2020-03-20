@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'base_url'  => 'https://www.pagueveloz.com.br/',
-    'email'     => '',
-    'token'     => '',
+    'base_url'  => env('PAGUEVELOZ_URL', 'https://www.pagueveloz.com.br/'),
+    'email'     => env('PAGUEVELOZ_EMAIL', ''),
+    'token'     => env('PAGUEVELOZ_TOKEN', '')
 ];
