@@ -24,7 +24,7 @@ class Transferencia
      * @param Array transferencia
      * @return Array
      */
-    public function create($transferencia)
+    public function criar($transferencia)
     {
         $transferencia = $this->setTransferencia($transferencia);
 

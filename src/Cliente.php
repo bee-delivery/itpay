@@ -24,7 +24,7 @@ class Cliente
      * @param Array cliente
      * @return Array
      */
-    public function create($cliente)
+    public function criar($cliente)
     {
         $cliente = $this->setCliente($cliente);
         return $this->http->post('api/v5/Assinar', ['form_params' => $cliente]);
@@ -37,7 +37,7 @@ class Cliente
      * @see https://www.pagueveloz.com.br/Help/Api/GET-api-v4-Cliente-DocumentosPendentes_contaBancariaId
      * @return Array
      */
-    public function pendingDocuments()
+    public function documentosPendentes()
     {
         return $this->http->get('api/v4/Cliente/DocumentosPendentes');
     }
