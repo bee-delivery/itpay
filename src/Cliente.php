@@ -30,6 +30,17 @@ class Cliente
         return $this->http->post('api/v5/Assinar', ['form_params' => $cliente]);
     }
 
+    /**
+     * Pesquisa um cliente PagueVeloz.
+     *
+     * @see
+     * @param Array cliente
+     * @return Array
+     */
+    public function pesquisar($termo)
+    {
+        return $this->http->get('api/v3/Transferencia/ClienteDestino?filtro=' . $termo );
+    }
 
     /**
      * Lista os documentos pendentes do cliente PagueVeloz.
