@@ -18,5 +18,12 @@
         "psr-4": {
             "BeeDelivery\\PagueVeloz\\": "src/"
         }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "BeeDelivery\\PagueVeloz\\PagueVelozServiceProvider"
+            ]
+        }
     }
 }
