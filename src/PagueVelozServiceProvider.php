@@ -23,6 +23,8 @@ class PagueVelozServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        $this->publishes([
+            __DIR__.'/config/pagueveloz.php' => config_path('pagueveloz.php'),
+        ]);
     }
 }
