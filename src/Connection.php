@@ -11,12 +11,12 @@ class Connection {
     protected $email;
     protected $token;
 
-    public function __construct() {
+    public function __construct($clienteEmail = null, $clienteToken = null) {
 
 
         $this->base_url     = config('pagueveloz.base_url');
-        $this->email        = config('pagueveloz.email');
-        $this->token        = config('pagueveloz.token');
+        $this->email        = $clienteEmail == null ? config('pagueveloz.email') : $clienteEmail;
+        $this->token        = $clienteToken == null ? config('pagueveloz.token') : $clienteToken;
 
         $headers = [
             'Content-Type'  => 'application/json',

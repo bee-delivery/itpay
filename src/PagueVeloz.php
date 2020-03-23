@@ -10,8 +10,8 @@ use BeeDelivery\PagueVeloz\src\Usuario;
 class PagueVeloz
 {
 
-    public function cliente($userEmail = null, $userToken = null) {
-        return new Cliente($userEmail, $userToken);
+    public function cliente($clienteEmail = null, $clienteToken = null) {
+        return new Cliente($clienteEmail, $clienteToken);
     }
 
     public function transferencia() {
@@ -22,7 +22,7 @@ class PagueVeloz
         return new Usuario();
     }
 
-    public function saldo($userEmail = null, $userToken = null) {
-        return new Saldo($userEmail, $userToken);
+    public function saldo($clienteEmail = null, $clienteToken = null) {
+        return new Saldo($clienteEmail, $clienteToken);
     }
 }
