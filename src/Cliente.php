@@ -61,8 +61,7 @@ class Cliente
      */
     public function documentoEnviar($documento)
     {
-        $documento = $this->setDocumento($documento);
-        return $this->http->post('api/v4/Cliente/DocumentosPendentes', ['form_params' => $documento]);
+        return $this->http->put('api/v4/Cliente/DocumentosPendentes', ['form_params' => $documento]);
     }
 
     /**
@@ -118,51 +117,6 @@ class Cliente
             empty($cliente['Endereco']) OR
             empty($cliente['Telefones']) OR
             empty($cliente['Usuario'])
-        );
-    }
-
-
-    /**
-     * Faz merge nas informações do documento.
-     *
-     * @param Array $documento
-     * @return Array
-     */
-    public function setDocumento($documento)
-    {
-        try {
-
-            if ( ! $this->documento_is_valid($documento) ) {
-                throw new \Exception('Dados inválidos.');
-            }
-
-            $this->cliente = array(
-                'Id'                        => '',
-                'NomeArquivo'               => '',
-                'ConteudoArquivoBase64'     => ''
-            );
-
-            $this->cliente = array_merge($this->documento, $documento);
-            return $this->cliente;
-
-        } catch (\Exception $e) {
-            return 'Erro ao definir o documento. - ' . $e->getMessage();
-        }
-    }
-
-
-    /**
-     * Verifica se os dados do documento são válidas.
-     *
-     * @param array $documento
-     * @return Boolean
-     */
-    public function documento_is_valid($documento)
-    {
-        return ! (
-            empty($cliente['Id']) OR
-            empty($cliente['NomeArquivo']) OR
-            empty($cliente['ConteudoArquivoBase64'])
         );
     }
 }

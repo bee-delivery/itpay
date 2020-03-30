@@ -66,4 +66,24 @@ class Connection {
             ];
         }
     }
+
+    public function put($url, $params)
+    {
+
+        try {
+            $response = $this->http->put($this->base_url . $url, $params);
+
+            return [
+                'code'     => $response->getStatusCode(),
+                'response' => json_decode($response->getBody()->getContents())
+            ];
+
+        } catch (\Exception $e){
+
+            return [
+                'code'     => $e->getCode(),
+                'response' => $e->getResponse()->getBody()->getContents()
+            ];
+        }
+    }
 }
