@@ -10,7 +10,7 @@ class ContaBancaria
 {
 
     public $http;
-    protected $cliente;
+    protected $conta;
 
     public function __construct($clienteEmail = null, $clienteToken = null)
     {
@@ -110,21 +110,21 @@ class ContaBancaria
     /**
      * Verifica se os dados da transferência são válidas.
      *
-     * @param array $cliente
+     * @param array $conta
      * @return Boolean
      */
-    public function conta_is_valid($cliente)
+    public function conta_is_valid($conta)
     {
         return ! (
-            empty($cliente['CodigoBanco']) OR
-            empty($cliente['CodigoAgencia']) OR
-            empty($cliente['NumeroConta']) OR
-            empty($cliente['DigitoConta']) OR
-            empty($cliente['Descricao']) OR
-            empty($cliente['TipoConta']) OR
-            empty($cliente['TipoTitular']) OR
-            empty($cliente['Titular']['Nome']) OR
-            empty($cliente['Titular']['Documento'])
+            empty($conta['CodigoBanco']) OR
+            empty($conta['CodigoAgencia']) OR
+            empty($conta['NumeroConta']) OR
+            empty($conta['DigitoConta']) OR
+            empty($conta['Descricao']) OR
+            $conta['TipoConta'] == '' OR
+            $conta['TipoTitular'] == '' OR
+            empty($conta['Titular']['Nome']) OR
+            empty($conta['Titular']['Documento'])
         );
     }
 }
