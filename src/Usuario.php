@@ -40,7 +40,7 @@ class Usuario
     {
         $senha = $this->setSenha($senha);
 
-        return $this->http->post('api/v2/UsuarioCliente/AlteraSenha/' . $id, ['form_params' => $senha]);
+        return $this->http->put('api/v2/UsuarioCliente/AlteraSenha/' . $id, ['form_params' => $senha]);
     }
 
 
@@ -82,7 +82,6 @@ class Usuario
     public function senha_is_valid($senha)
     {
         return ! (
-            empty($senha['SenhaAtual']) OR
             empty($senha['Senha']) OR
             empty($senha['ConfirmacaoSenha']) OR
             empty($senha['Id']) OR
