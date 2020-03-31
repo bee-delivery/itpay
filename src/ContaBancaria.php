@@ -38,7 +38,7 @@ class ContaBancaria
     public function criar($conta)
     {
         $conta = $this->setConta($conta);
-        return $this->http->post('api/v5/ContaBancaria', ['form_params' => $conta]);
+        return $this->http->post('api/v5/ContaBancaria', ['json' => $conta]);
     }
 
     /**
