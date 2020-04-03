@@ -43,6 +43,17 @@ class Cliente
     }
 
     /**
+     * Lista os usuarios do cliente PagueVeloz.
+     *
+     * @see https://www.pagueveloz.com.br/Help/Api/GET-api-v2-UsuarioCliente
+     * @return Array
+     */
+    public function usuarios()
+    {
+        return $this->http->get('api/v2/UsuarioCliente');
+    }
+
+    /**
      * Lista os documentos pendentes do cliente PagueVeloz.
      *
      * @see https://www.pagueveloz.com.br/Help/Api/GET-api-v4-Cliente-DocumentosPendentes_contaBancariaId
