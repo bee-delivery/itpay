@@ -40,7 +40,7 @@ class Usuario
     {
         $senha = $this->setSenha($senha);
 
-        return $this->http->put('api/v2/UsuarioCliente/AlteraSenha/' . $id, ['form_params' => $senha]);
+        return $this->http->put('api/v2/UsuarioCliente/AlteraSenha/' . $id, ['json' => $senha]);
     }
 
 

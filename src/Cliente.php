@@ -31,6 +31,18 @@ class Cliente
     }
 
     /**
+     * Atualiza o cliente PagueVeloz.
+     *
+     * @see https://www.pagueveloz.com.br/Help/Api/PUT-api-v4-Cliente
+     * @param Array cliente
+     * @return Array
+     */
+    public function atualizar($cliente)
+    {
+        return $this->http->put('api/v4/Cliente', ['form_params' => $cliente]);
+    }
+
+    /**
      * Pesquisa um cliente PagueVeloz.
      *
      * @see
