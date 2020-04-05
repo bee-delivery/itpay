@@ -19,8 +19,8 @@ class PagueVeloz
         return new Transferencia();
     }
 
-    public function usuario() {
-        return new Usuario();
+    public function usuario($clienteEmail = null, $clienteToken = null) {
+        return new Usuario($clienteEmail, $clienteToken);
     }
 
     public function saldo($clienteEmail = null, $clienteToken = null) {
