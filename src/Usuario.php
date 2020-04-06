@@ -39,7 +39,7 @@ class Usuario
     public function changePassword($id, $senha)
     {
         $senha = $this->setSenha($senha);
-
+        //wtf
         return $this->http->put('api/v2/UsuarioCliente/AlteraSenha/' . $id, ['json' => $senha]);
     }
 
