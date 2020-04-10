@@ -30,6 +30,18 @@ class Usuario
     }
 
     /**
+     * Atualiza um usuario PagueVeloz.
+     *
+     * @see https://www.pagueveloz.com.br/Help/Api/PUT-api-v2-UsuarioCliente-id
+     * @param Array usuario
+     * @return Array
+     */
+    public function atualizar($id, $usuario)
+    {
+        return $this->http->put('api/v2/UsuarioCliente/' . $id, ['json' => $usuario]);
+    }
+
+    /**
      * Altera a senha de um usuario PagueVeloz.
      *
      * @see https://www.pagueveloz.com.br/Help/Api/PUT-api-v2-UsuarioCliente-AlteraSenha-id
