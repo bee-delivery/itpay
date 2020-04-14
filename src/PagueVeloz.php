@@ -5,6 +5,7 @@ namespace BeeDelivery\PagueVeloz;
 use BeeDelivery\PagueVeloz\src\Cliente;
 use BeeDelivery\PagueVeloz\src\ContaBancaria;
 use BeeDelivery\PagueVeloz\src\Saldo;
+use BeeDelivery\PagueVeloz\src\Tarifa;
 use BeeDelivery\PagueVeloz\src\Transferencia;
 use BeeDelivery\PagueVeloz\src\Usuario;
 
@@ -30,4 +31,9 @@ class PagueVeloz
     public function contaBancaria($clienteEmail, $clienteToken) {
         return new ContaBancaria($clienteEmail, $clienteToken);
     }
+
+    public function tarifa($clienteEmail, $clienteToken) {
+        return new Tarifa($clienteEmail, $clienteToken);
+    }
+
 }
