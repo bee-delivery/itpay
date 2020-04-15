@@ -26,7 +26,6 @@ class Tarifa
      */
     public function ativarCupom($cupom)
     {
-        $cliente = $this->setCliente($cupom);
         return $this->http->post('api/v1/Tarifa/AtivarCupom', ['json' => $cupom]);
     }
 }
