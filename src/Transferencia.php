@@ -31,6 +31,17 @@ class Transferencia
         return $this->http->post('api/v3/Transferencia', ['json' => $transferencia]);
     }
 
+    /**
+     * Pesquisa uma transferência na PagueVeloz.
+     *
+     * @see https://www.pagueveloz.com.br/Help/Api/GET-api-v3-Transferencia_seuNumero
+     * @param string $seuNumero
+     * @return Array
+     */
+    public function buscarBySeuNumero($seuNumero)
+    {
+        return $this->http->get('api/v3/Transferencia?seuNumero='.$seuNumero);
+    }
 
     /**
      * Faz merge nas informações da transferência.
