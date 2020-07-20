@@ -38,7 +38,7 @@ class Transferencia
      * @param string $seuNumero
      * @return Array
      */
-    public function buscarBySeuNumero($seuNumero)
+    public function buscarSeuNumero($seuNumero)
     {
         return $this->http->get('api/v3/Transferencia?seuNumero='.$seuNumero);
     }
