@@ -26,7 +26,7 @@ class Saldo
      */
     public function saldo()
     {
-        return $this->http->get('api/v3/Saldo');
+        return $this->http->get('api/v1/Saldo');
     }
 
 }
