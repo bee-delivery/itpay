@@ -1,10 +1,10 @@
 <?php
 
-namespace BeeDelivery\PagueVeloz\src;
+namespace BeeDelivery\ItPay\src;
 
 
 
-use BeeDelivery\PagueVeloz\Connection;
+use BeeDelivery\ItPay\Connection;
 
 class Transferencia
 {
@@ -20,7 +20,7 @@ class Transferencia
     /**
      * Efetua uma transferência entre contas PagueVeloz.
      *
-     * @see https://www.pagueveloz.com.br/Help/Api/POST-api-v3-Transferencia
+     * @see https://www.itpay.com.br/Help/Api/POST-api-v3-Transferencia
      * @param Array transferencia
      * @return Array
      */
@@ -34,7 +34,7 @@ class Transferencia
     /**
      * Pesquisa uma transferência na PagueVeloz.
      *
-     * @see https://www.pagueveloz.com.br/Help/Api/GET-api-v3-Transferencia_seuNumero
+     * @see https://www.itpay.com.br/Help/Api/GET-api-v3-Transferencia_seuNumero
      * @param string $seuNumero
      * @return Array
      */

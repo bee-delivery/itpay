@@ -1,6 +1,6 @@
 <?php
 
-namespace BeeDelivery\PagueVeloz;
+namespace BeeDelivery\ItPay;
 
 use Illuminate\Support\ServiceProvider;
 

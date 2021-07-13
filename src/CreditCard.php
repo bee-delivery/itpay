@@ -1,12 +1,12 @@
 <?php
 
-namespace BeeDelivery\PagueVeloz\src;
+namespace BeeDelivery\ItPay\src;
 
 
 
-use BeeDelivery\PagueVeloz\Connection;
+use BeeDelivery\ItPay\Connection;
 
-class ContaBancaria
+class CreditCard
 {
 
     public $http;
@@ -20,7 +20,7 @@ class ContaBancaria
     /**
      * Listar contas bancárias cadastradas na PagueVeloz.
      *
-     * @see https://www.pagueveloz.com.br/Help/Api/GET-api-v5-ContaBancaria
+     * @see https://www.itpay.com.br/Help/Api/GET-api-v5-ContaBancaria
      * @return Array
      */
     public function listar()
@@ -31,7 +31,7 @@ class ContaBancaria
     /**
      * Cria uma nova conta bancária PagueVeloz.
      *
-     * @see https://www.pagueveloz.com.br/Help/Api/POST-api-v5-ContaBancaria
+     * @see https://www.itpay.com.br/Help/Api/POST-api-v5-ContaBancaria
      * @param Array conta
      * @return Array
      */
@@ -44,7 +44,7 @@ class ContaBancaria
     /**
      * Pesquisa um cliente PagueVeloz.
      *
-     * @see https://www.pagueveloz.com.br/Help/Api/GET-api-v5-ContaBancaria-id
+     * @see https://www.itpay.com.br/Help/Api/GET-api-v5-ContaBancaria-id
      * @param Array id
      * @return Array
      */
@@ -56,7 +56,7 @@ class ContaBancaria
     /**
      * Altera uma conta bancária PagueVeloz.
      *
-     * @see https://www.pagueveloz.com.br/Help/Api/PUT-api-v5-ContaBancaria-id
+     * @see https://www.itpay.com.br/Help/Api/PUT-api-v5-ContaBancaria-id
      * @param Integer id
      * @param Array conta
      * @return Array

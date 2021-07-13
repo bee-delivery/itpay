@@ -1,10 +1,10 @@
 <?php
 
-namespace BeeDelivery\PagueVeloz\src;
+namespace BeeDelivery\ItPay\src;
 
 
 
-use BeeDelivery\PagueVeloz\Connection;
+use BeeDelivery\ItPay\Connection;
 
 class Saldo
 {
@@ -20,7 +20,7 @@ class Saldo
     /**
      * Consulta o saldo de um cliente PagueVeloz.
      *
-     * @see https://www.pagueveloz.com.br/Help/Api/GET-api-v1-Saldo
+     * @see https://www.itpay.com.br/Help/Api/GET-api-v1-Saldo
      * @param Array saldo
      * @return Array
      */
