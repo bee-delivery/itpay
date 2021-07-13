@@ -2,19 +2,17 @@
 
 namespace BeeDelivery\ItPay\src;
 
-
-
 use BeeDelivery\ItPay\Connection;
 
-class Transferencia
+class Transfer
 {
 
     public $http;
-    protected $transferencia;
+    protected $creditcard;
 
-    public function __construct($clienteEmail = null, $clienteToken = null)
+    public function __construct($token = null)
     {
-        $this->http = new Connection($clienteEmail, $clienteToken);
+        $this->http = new Connection($token);
     }
 
     /**
@@ -24,49 +22,38 @@ class Transferencia
      * @param Array transferencia
      * @return Array
      */
-    public function criar($transferencia)
+    public function transaction($creditcard)
     {
-        $transferencia = $this->setTransferencia($transferencia);
+        $creditcard = $this->setCreditCard($creditcard);
 
-        return $this->http->post('api/v3/Transferencia', ['json' => $transferencia]);
+        return $this->http->post('api/creditcard', ['json' => $creditcard]);
     }
 
-    /**
-     * Pesquisa uma transferência na PagueVeloz.
-     *
-     * @see https://www.itpay.com.br/Help/Api/GET-api-v3-Transferencia_seuNumero
-     * @param string $seuNumero
-     * @return Array
-     */
-    public function buscarSeuNumero($seuNumero)
-    {
-        return $this->http->get('api/v3/Transferencia?seuNumero='.$seuNumero);
-    }
 
     /**
      * Faz merge nas informações da transferência.
      *
-     * @param Array $transferencia
+     * @param Array $transfer
      * @return Array
      */
-    public function setTransferencia($transferencia)
+    public function setCreditCard($creditcard)
     {
         try {
 
-            if ( ! $this->transferencia_is_valid($transferencia) ) {
+            if ( ! $this->creditcard_is_valid($creditcard) ) {
                 throw new \Exception('Dados inválidos.');
             }
 
-            $this->transferencia = array(
-                'ClienteDestinoId'  => '',
-                'Valor'             => '',
-                'Descricao'         => '',
-                'SeuNumero'         => ''
+            $this->transfer = array(
+                'account_id_from' => '',
+                'account_id_to' => '',
+                'description' => '',
+                'amount' => ''
             );
 
-            $this->transferencia = array_merge($this->transferencia, $transferencia);
+            $this->creditcard = array_merge($this->creditcard, $creditcard);
 
-            return $this->transferencia;
+            return $this->creditcard;
 
         } catch (\Exception $e) {
             return 'Erro ao definir a transferência. - ' . $e->getMessage();
@@ -76,15 +63,19 @@ class Transferencia
     /**
      * Verifica se os dados da transferência são válidas.
      *
-     * @param array $cliente
+     * @param array $creditcard
      * @return Boolean
      */
-    public function transferencia_is_valid($transferencia)
+    public function creditcard_is_valid($creditcard)
     {
         return ! (
-            empty($transferencia['ClienteDestinoId']) OR
-            empty($transferencia['Valor']) OR
-            empty($transferencia['Descricao'])
+            empty($transferencia['customer_id']) OR
+            empty($transferencia['account_id']) OR
+            empty($transferencia['holder_name']) OR
+            empty($transferencia['number']) OR
+            empty($transferencia['expiry']) OR
+            empty($transferencia['ccv']) OR
+            empty($transferencia['amount'])
         );
     }
 }

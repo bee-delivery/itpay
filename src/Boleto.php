@@ -1,34 +1,31 @@
 <?php
 
-namespace BeeDelivery\PagueVeloz\src;
+namespace BeeDelivery\ItPay\src;
 
-
-
-use BeeDelivery\PagueVeloz\Connection;
+use BeeDelivery\ItPay\Connection;
 
 class Boleto
 {
-
     public $http;
     protected $boleto;
 
-    public function __construct($clienteEmail = null, $clienteToken = null)
+    public function __construct($token = null)
     {
-        $this->http = new Connection($clienteEmail, $clienteToken);
+        $this->http = new Connection($token);
     }
 
     /**
      * Cria um novo boleto.
      *
-     * @see https://www.pagueveloz.com.br/Help/Api/POST-api-v7-Boleto
+     * @see https://www.itpay.com.br/Help/Api/POST-api-v7-Boleto
      * @param Array boleto
      * @return Array
      */
-    public function criar($boleto)
+    public function create($boleto)
     {
         $boleto = $this->setBoleto($boleto);
 
-        return $this->http->post('api/v7/Boleto', ['json' => $boleto]);
+        return $this->http->post('api/boletos', ['json' => $boleto]);
     }
 
 
@@ -47,37 +44,11 @@ class Boleto
             }
 
             $this->boleto = array(
-                'Sacado'            => '',
-                'CPFCNPJSacado'     => '',
-                'Vencimento'        => '',
-                'Valor'             => 0,
-                'SeuNumero'         => '',
-                'Parcela'           => '',
-                'Observacoes'       => '',
-                'Email'             => '',
-                'DataEnvioEmail'    => '',
-                'Pdf'               => true,
-                'Desconto'          => [
-                    'Tipo'          => '',
-                    'Valor'         => 0,
-                    'DataLimite'    => ''
-                ],
-                'Split'             => [
-                    [
-                        'CpfCnpjCliente'        => '',
-                        'ValorFixo'             => 0,
-                        'ValorPercentual'       => 0,
-                        'ValorTarifaFixo'       => 0,
-                        'ValorTarifaPercentual' => 0
-                    ],
-                    [
-                        'CpfCnpjCliente'        => '',
-                        'ValorFixo'             => 0,
-                        'ValorPercentual'       => 0,
-                        'ValorTarifaFixo'       => 0,
-                        'ValorTarifaPercentual' => 0
-                    ]
-                ]
+                'customer_id' => '',
+                'account_id' => '',
+                'description' => '',
+                'amount' => 0,
+                'due_date' => ''
             );
 
             $this->boleto = array_merge($this->boleto, $boleto);
@@ -92,16 +63,17 @@ class Boleto
     /**
      * Verifica se os dados do boleto são válidos.
      *
-     * @param array $cliente
+     * @param array $boleto
      * @return Boolean
      */
     public function boleto_is_valid($boleto)
     {
         return ! (
-            empty($boleto['Sacado']) OR
-            empty($boleto['CPFCNPJSacado']) OR
-            empty($boleto['Vencimento']) OR
-            empty($boleto['Valor'])
+            empty($boleto['customer_id']) OR
+            empty($boleto['account_id']) OR
+            empty($boleto['description']) OR
+            empty($boleto['amount']) OR
+            empty($boleto['due_date'])
         );
     }
 }

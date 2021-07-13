@@ -2,31 +2,29 @@
 
 namespace BeeDelivery\ItPay\src;
 
-
-
 use BeeDelivery\ItPay\Connection;
 
-class Saldo
+class Balance
 {
 
     public $http;
-    protected $saldo;
+    protected $balance;
 
-    public function __construct($clienteEmail = null, $clienteToken = null)
+    public function __construct($token = null)
     {
-        $this->http = new Connection($clienteEmail, $clienteToken);
+        $this->http = new Connection($token);
     }
 
     /**
-     * Consulta o saldo de um cliente PagueVeloz.
+     * Consulta o saldo de um cliente ItPay.
      *
      * @see https://www.itpay.com.br/Help/Api/GET-api-v1-Saldo
-     * @param Array saldo
+     * @param Array balance
      * @return Array
      */
-    public function saldo()
+    public function balance()
     {
-        return $this->http->get('api/v1/Saldo');
+        return $this->http->get('api/balance');
     }
 
 }

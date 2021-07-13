@@ -1,6 +1,6 @@
 <?php
 
-namespace BeeDelivery\PagueVeloz;
+namespace BeeDelivery\ItPay;
 
 use GuzzleHttp\Client;
 
@@ -8,19 +8,16 @@ class Connection {
 
     protected $http;
     protected $base_url;
-    protected $email;
     protected $token;
 
-    public function __construct($clienteEmail, $clienteToken) {
+    public function __construct($customerToken) {
 
-
-        $this->base_url     = config('pagueveloz.base_url');
-        $this->email        = $clienteEmail;
-        $this->token        = $clienteToken;
+        $this->base_url     = config('itpay.base_url');
+        $this->token        = $customerToken;
 
         $headers = [
             'Content-Type'  => 'application/json',
-            'Authorization' => 'Basic ' . base64_encode($this->email.':'.$this->token)
+            'Authorization' => 'Bearer ' . $this->token
         ];
 
         $this->http = new Client([

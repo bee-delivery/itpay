@@ -2,105 +2,55 @@
 
 namespace BeeDelivery\ItPay\src;
 
-
-
 use BeeDelivery\ItPay\Connection;
 
-class ContaBancaria
+class CashIn
 {
 
     public $http;
-    protected $conta;
+    protected $cashin;
 
-    public function __construct($clienteEmail = null, $clienteToken = null)
+    public function __construct($token = null)
     {
-        $this->http = new Connection($clienteEmail, $clienteToken);
-    }
-
-    /**
-     * Listar contas bancárias cadastradas na PagueVeloz.
-     *
-     * @see https://www.itpay.com.br/Help/Api/GET-api-v5-ContaBancaria
-     * @return Array
-     */
-    public function listar()
-    {
-        return $this->http->get('api/v5/ContaBancaria');
+        $this->http = new Connection($token);
     }
 
     /**
      * Cria uma nova conta bancária PagueVeloz.
      *
      * @see https://www.itpay.com.br/Help/Api/POST-api-v5-ContaBancaria
-     * @param Array conta
+     * @param Array cashin
      * @return Array
      */
-    public function criar($conta)
+    public function cashin($cashin)
     {
-        $conta = $this->setConta($conta);
-        return $this->http->post('api/v5/ContaBancaria', ['json' => $conta]);
-    }
-
-    /**
-     * Pesquisa um cliente PagueVeloz.
-     *
-     * @see https://www.itpay.com.br/Help/Api/GET-api-v5-ContaBancaria-id
-     * @param Array id
-     * @return Array
-     */
-    public function encontrar($id)
-    {
-        return $this->http->get('api/v5/ContaBancaria/' . $id );
-    }
-
-    /**
-     * Altera uma conta bancária PagueVeloz.
-     *
-     * @see https://www.itpay.com.br/Help/Api/PUT-api-v5-ContaBancaria-id
-     * @param Integer id
-     * @param Array conta
-     * @return Array
-     */
-    public function alterar($id, $conta)
-    {
-        $conta = $this->setConta($conta);
-        return $this->http->put('api/v5/ContaBancaria/' . $id , ['form_params' => $conta]);
+        $cashin = $this->setCashIn($cashin);
+        return $this->http->post('api/cashin', ['json' => $cashin]);
     }
 
     /**
      * Faz merge nas informações da conta.
      *
-     * @param Array $conta
+     * @param Array $cashin
      * @return Array
      */
-    public function setConta($conta)
+    public function setCashIn($cashin)
     {
         try {
-            if ( ! $this->conta_is_valid($conta) ) {
+            if ( ! $this->cashin_is_valid($cashin) ) {
                 throw new \Exception('Dados inválidos.');
             }
 
-            $this->cliente = array(
-                'CodigoBanco'               => '',
-                'Operacao'                  => '',
-                'CodigoAgencia'             => '',
-                'DigitoAgencia'             => '',
-                'NumeroConta'               => '',
-                'DigitoConta'               => '',
-                'Descricao'                 => '',
-                'TipoConta'                 => '',
-                'TipoTitular'               => '',
-                'Titular'                   =>
-                    [
-                        'Nome'                  => '',
-                        'Documento'             => '',
-                        'TipoPessoa'            => 'NaoDefinido'
-                    ],
-                'DataValidadeSolicitada'    => ''
+            $this->cashin = array(
+                'customer' => '',
+                'account' => '',
+                'amount' => '',
+                'description' => '',
+                'external_reference' => ''
             );
 
-            $this->conta = array_merge($this->cliente, $conta);
-            return $this->conta;
+            $this->cashin = array_merge($this->cashin, $cashin);
+            return $this->cashin;
 
         } catch (\Exception $e) {
             return 'Erro ao definir a conta. - ' . $e->getMessage();
@@ -110,21 +60,16 @@ class ContaBancaria
     /**
      * Verifica se os dados da transferência são válidas.
      *
-     * @param array $conta
+     * @param array $cashin
      * @return Boolean
      */
-    public function conta_is_valid($conta)
+    public function cashin_is_valid($cashin)
     {
         return ! (
-            empty($conta['CodigoBanco']) OR
-            empty($conta['CodigoAgencia']) OR
-            empty($conta['NumeroConta']) OR
-            empty($conta['DigitoConta']) OR
-            empty($conta['Descricao']) OR
-            $conta['TipoConta'] == '' OR
-            $conta['TipoTitular'] == '' OR
-            empty($conta['Titular']['Nome']) OR
-            empty($conta['Titular']['Documento'])
+            empty($conta['customer']) OR
+            empty($conta['account']) OR
+            empty($conta['amount']) OR
+            empty($conta['description'])
         );
     }
 }

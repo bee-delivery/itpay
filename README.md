@@ -1,27 +1,27 @@
-# PagueVeloz Laravel
+# ItPay Laravel
 
-Pacote de integração com pagueveloz.com.br
+Pacote de integração com itpay.com.br
 
 ## Início
 
-Para começar, é necessário que você crie sua conta em https://www.pagueveloz.com.br/
+Para começar, é necessário que você crie sua conta em https://www.itpay.com.br/
 
 ## Instalando
 
 Instale com [composer](https://getcomposer.org/):
 
 ```bash
-composer require bee-delivery/pagueveloz
+composer require bee-delivery/itpay
 ```
 
 ## Como utilizar?
 
 
-[Documentação API Pague Veloz](https://www.pagueveloz.com.br/Help)
+[Documentação API ItPay](https://www.itpay.com.br/Help)
 
 ### Novo Cliente
 
-Criando uma conta na Pague Veloz. Veja em [DOC Pague Veloz - Novo Cliente](https://www.pagueveloz.com.br/Help/Api/POST-api-v5-Assinar)
+Criando uma conta no ItPay. Veja em 
 
 ```
 $cliente = [

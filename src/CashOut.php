@@ -4,11 +4,11 @@ namespace BeeDelivery\ItPay\src;
 
 use BeeDelivery\ItPay\Connection;
 
-class CashIn
+class CashOut
 {
 
     public $http;
-    protected $cashin;
+    protected $cashout;
 
     public function __construct($token = null)
     {
@@ -19,29 +19,29 @@ class CashIn
      * Cria uma nova conta bancária PagueVeloz.
      *
      * @see https://www.itpay.com.br/Help/Api/POST-api-v5-ContaBancaria
-     * @param Array cashin
+     * @param Array cashout
      * @return Array
      */
-    public function cashin($cashin)
+    public function cashout($cashout)
     {
-        $cashin = $this->setCashIn($cashin);
-        return $this->http->post('api/cashin', ['json' => $cashin]);
+        $cashout = $this->setCashOut($cashout);
+        return $this->http->post('api/cashout', ['json' => $cashout]);
     }
 
     /**
      * Faz merge nas informações da conta.
      *
-     * @param Array $cashin
+     * @param Array $cashout
      * @return Array
      */
-    public function setCashIn($cashin)
+    public function setCashOut($cashout)
     {
         try {
-            if ( ! $this->cashin_is_valid($cashin) ) {
+            if ( ! $this->cashout_is_valid($cashout) ) {
                 throw new \Exception('Dados inválidos.');
             }
 
-            $this->cashin = array(
+            $this->cashout = array(
                 'customer' => '',
                 'account' => '',
                 'amount' => '',
@@ -49,8 +49,8 @@ class CashIn
                 'external_reference' => ''
             );
 
-            $this->cashin = array_merge($this->cashin, $cashin);
-            return $this->cashin;
+            $this->cashout = array_merge($this->cashout, $cashout);
+            return $this->cashout;
 
         } catch (\Exception $e) {
             return 'Erro ao definir a conta. - ' . $e->getMessage();
@@ -60,10 +60,10 @@ class CashIn
     /**
      * Verifica se os dados da transferência são válidas.
      *
-     * @param array $cashin
+     * @param array $cashout
      * @return Boolean
      */
-    public function cashin_is_valid($cashin)
+    public function cashout_is_valid($cashout)
     {
         return ! (
             empty($conta['customer']) OR

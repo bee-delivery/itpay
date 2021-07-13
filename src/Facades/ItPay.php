@@ -1,10 +1,10 @@
 <?php
 
-namespace BeeDelivery\PagueVeloz\Facades;
+namespace BeeDelivery\ItPay\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
-class PagueVeloz extends Facade
+class ItPay extends Facade
 {
     /**
      * Get the registered name of the component.
@@ -13,6 +13,6 @@ class PagueVeloz extends Facade
      */
     protected static function getFacadeAccessor()
     {
-        return 'pagueveloz';
+        return 'itpay';
     }
 }

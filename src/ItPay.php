@@ -6,6 +6,8 @@ use BeeDelivery\ItPay\src\Customer;
 use BeeDelivery\ItPay\src\Transfer;
 use BeeDelivery\ItPay\src\Balance;
 use BeeDelivery\ItPay\src\Pix;
+use BeeDelivery\ItPay\src\CashIn;
+use BeeDelivery\ItPay\src\CashOut;
 
 class ItPay
 {
@@ -24,6 +26,18 @@ class ItPay
 
     public function pix($token) {
         return new Pix($token);
+    }
+
+    public function cashout($token) {
+        return new CashOut($token);
+    }
+
+    public function cashin($token) {
+        return new CashIn($token);
+    }
+
+    public function creditcard($token) {
+        return new CreditCard($token);
     }
 
 }

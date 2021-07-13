@@ -4,11 +4,11 @@ namespace BeeDelivery\ItPay\src;
 
 use BeeDelivery\ItPay\Connection;
 
-class CashIn
+class Pix
 {
 
     public $http;
-    protected $cashin;
+    protected $pix;
 
     public function __construct($token = null)
     {
@@ -19,25 +19,25 @@ class CashIn
      * Cria uma nova conta bancária PagueVeloz.
      *
      * @see https://www.itpay.com.br/Help/Api/POST-api-v5-ContaBancaria
-     * @param Array cashin
+     * @param Array $pix
      * @return Array
      */
-    public function cashin($cashin)
+    public function pix($pix)
     {
-        $cashin = $this->setCashIn($cashin);
-        return $this->http->post('api/cashin', ['json' => $cashin]);
+        $pix = $this->setPix($pix);
+        return $this->http->post('api/pix', ['json' => $pix]);
     }
 
     /**
      * Faz merge nas informações da conta.
      *
-     * @param Array $cashin
+     * @param Array $pix
      * @return Array
      */
-    public function setCashIn($cashin)
+    public function setPix($pix)
     {
         try {
-            if ( ! $this->cashin_is_valid($cashin) ) {
+            if ( ! $this->pix_is_valid($pix) ) {
                 throw new \Exception('Dados inválidos.');
             }
 
@@ -46,11 +46,13 @@ class CashIn
                 'account' => '',
                 'amount' => '',
                 'description' => '',
+                'key_type' => '',
+                'key' => '',
                 'external_reference' => ''
             );
 
-            $this->cashin = array_merge($this->cashin, $cashin);
-            return $this->cashin;
+            $this->pix = array_merge($this->pix, $pix);
+            return $this->pix;
 
         } catch (\Exception $e) {
             return 'Erro ao definir a conta. - ' . $e->getMessage();
@@ -60,16 +62,18 @@ class CashIn
     /**
      * Verifica se os dados da transferência são válidas.
      *
-     * @param array $cashin
+     * @param array $pix
      * @return Boolean
      */
-    public function cashin_is_valid($cashin)
+    public function pix_is_valid($pix)
     {
         return ! (
             empty($conta['customer']) OR
             empty($conta['account']) OR
             empty($conta['amount']) OR
-            empty($conta['description'])
+            empty($conta['description']) OR
+            empty($conta['key_type']) OR
+            empty($conta['key'])
         );
     }
 }

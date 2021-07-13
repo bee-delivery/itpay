@@ -1,145 +1,100 @@
 <?php
 
-namespace BeeDelivery\PagueVeloz\src;
+namespace BeeDelivery\ItPay\src;
 
+use BeeDelivery\ItPay\Connection;
 
-
-use BeeDelivery\PagueVeloz\Connection;
-
-class Cliente
+class Customer
 {
 
     public $http;
-    protected $cliente;
+    protected $customer;
 
-    public function __construct($clienteEmail = null, $clienteToken = null)
+    public function __construct($token = null)
     {
-        $this->http = new Connection($clienteEmail, $clienteToken);
+        $this->http = new Connection($token);
     }
 
     /**
-     * Efetua assinatura de um novo cliente PagueVeloz.
+     * Efetua assinatura de um novo customer PagueVeloz.
      *
-     * @see https://www.pagueveloz.com.br/Help/Api/POST-api-v5-Assinar
-     * @param Array cliente
+     * @see https://www.itpay.com.br/Help/Api/POST-api-v5-Assinar
+     * @param Array customer
      * @return Array
      */
-    public function criar($cliente)
+    public function create($customer)
     {
-        $cliente = $this->setCliente($cliente);
-        return $this->http->post('api/v5/Assinar', ['form_params' => $cliente]);
+        $customer = $this->setCustomer($customer);
+        return $this->http->post('api/customers', ['json' => $customer]);
     }
 
     /**
-     * Atualiza o cliente PagueVeloz.
+     * Atualiza o customer PagueVeloz.
      *
-     * @see https://www.pagueveloz.com.br/Help/Api/PUT-api-v4-Cliente
-     * @param Array cliente
+     * @see https://www.itpay.com.br/Help/Api/PUT-api-v4-Cliente
+     * @param Array customer
      * @return Array
      */
-    public function atualizar($cliente)
+    public function update($customer)
     {
-        return $this->http->put('api/v4/Cliente', ['form_params' => $cliente]);
+        return $this->http->put('api/customers', ['json' => $customer]);
     }
 
-    /**
-     * Pesquisa um cliente PagueVeloz.
-     *
-     * @see
-     * @param Array cliente
-     * @return Array
-     */
-    public function pesquisar($termo)
-    {
-        return $this->http->get('api/v3/Transferencia/ClienteDestino?filtro=' . $termo );
-    }
 
-    /**
-     * Lista os usuarios do cliente PagueVeloz.
-     *
-     * @see https://www.pagueveloz.com.br/Help/Api/GET-api-v2-UsuarioCliente
-     * @return Array
-     */
-    public function usuarios()
-    {
-        return $this->http->get('api/v2/UsuarioCliente');
-    }
-
-    /**
-     * Lista os documentos pendentes do cliente PagueVeloz.
-     *
-     * @see https://www.pagueveloz.com.br/Help/Api/GET-api-v4-Cliente-DocumentosPendentes_contaBancariaId
-     * @return Array
-     */
-    public function documentosPendentes()
-    {
-        return $this->http->get('api/v4/Cliente/DocumentosPendentes');
-    }
-
-    /**
-     * Envia o documento do cliente PagueVeloz.
-     *
-     * @see https://www.pagueveloz.com.br/Help/Api/PUT-api-v4-Cliente-DocumentosPendentes
-     * @return Array
-     */
-    public function documentoEnviar($documento)
-    {
-        return $this->http->put('api/v4/Cliente/DocumentosPendentes', ['form_params' => $documento]);
-    }
 
     /**
      * Faz merge nas informações do cliente.
      *
-     * @param Array $cliente
+     * @param Array $customer
      * @return Array
      */
-    public function setCliente($cliente)
+    public function setCustomer($customer)
     {
         try {
 
-            if ( ! $this->cliente_is_valid($cliente) ) {
+            if ( ! $this->customer_is_valid($customer) ) {
                 throw new \Exception('Dados inválidos.');
             }
 
-            $this->cliente = array(
-                'Nome'                  => '',
-                'Documento'             => '',
-                'TipoPessoa'            => '',
-                'Email'                 => '',
-                'Endereco'              => '',
-                'Telefones'             => '',
-                'Usuario'               => '',
-                'DataNascimento'        => '',
-                'UrlNotificacao'        => '',
-                'InscricaoEstadual'     => '',
-                'InscricaoMunicipal'    => '',
-                'Cupom'                 => ''
+            $this->customer = array(
+                'name' => '',
+                'email' => '',
+                'customer_type' => '',
+                'document' => '',
+                'phone_number' => '',
+                'address' => '',
+                'address_number' => '',
+                'state' => '',
+                'city' => ''
             );
 
-            $this->cliente = array_merge($this->cliente, $cliente);
-            return $this->cliente;
+            $this->customer = array_merge($this->customer, $customer);
+            return $this->customer;
 
         } catch (\Exception $e) {
             return 'Erro ao definir o cliente. - ' . $e->getMessage();
         }
     }
 
+
     /**
      * Verifica se os dados da transferência são válidas.
      *
-     * @param array $cliente
+     * @param array $customer
      * @return Boolean
      */
-    public function cliente_is_valid($cliente)
+    public function customer_is_valid($customer)
     {
         return ! (
-            empty($cliente['Nome']) OR
-            empty($cliente['Documento']) OR
-            empty($cliente['TipoPessoa']) OR
-            empty($cliente['Email']) OR
-            empty($cliente['Endereco']) OR
-            empty($cliente['Telefones']) OR
-            empty($cliente['Usuario'])
+            empty($customer['name']) OR
+            empty($customer['email']) OR
+            empty($customer['customer_type']) OR
+            empty($customer['document']) OR
+            empty($customer['phone_number']) OR
+            empty($customer['address']) OR
+            empty($customer['address_number']) OR
+            empty($customer['state']) OR
+            empty($customer['city'])
         );
     }
 }

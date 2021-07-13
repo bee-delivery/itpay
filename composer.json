@@ -1,6 +1,6 @@
 {
-    "name": "bee-delivery/pagueveloz",
-    "description": "Integração rápida e fácil com o Pague Veloz, em PHP",
+    "name": "bee-delivery/itpay",
+    "description": "Integração rápida e fácil com o ItPay, em PHP",
     "authors": [
         {
             "name": "Bee delivery",
@@ -16,13 +16,13 @@
     },
     "autoload": {
         "psr-4": {
-            "BeeDelivery\\PagueVeloz\\": "src/"
+            "BeeDelivery\\ItPay\\": "src/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "BeeDelivery\\PagueVeloz\\PagueVelozServiceProvider"
+                "BeeDelivery\\ItPay\\ItPayServiceProvider"
             ]
         }
     }

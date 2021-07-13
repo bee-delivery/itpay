@@ -4,7 +4,7 @@ namespace BeeDelivery\ItPay;
 
 use Illuminate\Support\ServiceProvider;
 
-class PagueVelozServiceProvider extends ServiceProvider
+class ItPayServiceProvider extends ServiceProvider
 {
     /**
      * Register services.
@@ -13,11 +13,11 @@ class PagueVelozServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__.'/config/pagueveloz.php', 'pagueveloz');
+        $this->mergeConfigFrom(__DIR__.'/config/itpay.php', 'itpay');
 
         // Register the service the package provides.
-        $this->app->singleton('pagueveloz', function ($app) {
-            return new PagueVeloz;
+        $this->app->singleton('itpay', function ($app) {
+            return new ItPay;
         });
     }
 
@@ -29,7 +29,7 @@ class PagueVelozServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__.'/config/pagueveloz.php' => config_path('pagueveloz.php'),
+            __DIR__.'/config/itpay.php' => config_path('itpay.php'),
         ]);
     }
 
@@ -40,6 +40,6 @@ class PagueVelozServiceProvider extends ServiceProvider
      */
     public function provides()
     {
-        return ['pagueveloz'];
+        return ['itpay'];
     }
 }
